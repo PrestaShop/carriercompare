@@ -36,7 +36,7 @@ class CarrierCompare extends Module
 	{
 		$this->name = 'carriercompare';
 		$this->tab = 'shipping_logistics';
-		$this->version = '2.1.0';
+		$this->version = '2.1.1';
 		$this->author = 'PrestaShop';
 		$this->need_instance = 0;
 
@@ -45,6 +45,7 @@ class CarrierCompare extends Module
 
 		$this->displayName = $this->l('Shipping Estimate');
 		$this->description = $this->l('Compares carrier choices before checkout.');
+		$this->ps_versions_compliancy = array('min' => '1.5.6.1', 'max' => _PS_VERSION_);
 		$this->template_directory = dirname(__FILE__).'/template/';
 		$this->initRetroCompatibilityVar();
 	}
