@@ -208,13 +208,14 @@ class CarrierCompare extends Module
 
 		$cart = new Cart();
 		$cart->id_currency = $exiting_cart->id_currency;
+		$cart->id_customer = $exiting_cart->id_customer;
 		$cart->id_lang = $exiting_cart->id_lang;
 		$cart->id_address_delivery = $addr_temp->id;
 		$cart->add();
 
 		$products = $exiting_cart->getProducts();
 		foreach ($products as $key => $product) {
-			$cart->updateQty($product['quantity'], $product['id_product']);	
+			$cart->updateQty($product['quantity'], $product['id_product'], $product['id_product_attribute']);
 		}
 
 		$carriers = $cart->simulateCarriersOutput(null, true);
