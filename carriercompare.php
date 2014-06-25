@@ -36,7 +36,7 @@ class CarrierCompare extends Module
 	{
 		$this->name = 'carriercompare';
 		$this->tab = 'shipping_logistics';
-		$this->version = '2.1.3';
+		$this->version = '2.1.4';
 		$this->author = 'PrestaShop';
 		$this->need_instance = 0;
 
