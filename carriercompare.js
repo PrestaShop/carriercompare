@@ -25,19 +25,19 @@
 
 $(document).ready(function(){	
 	$(document).ready(function() {		
-		$('#id_country').change(function() {
+		$(document).on('change', '#id_country', function() {
 			resetAjaxQueries();
 			updateStateByIdCountry();
 		});
 
 		if (SE_RefreshMethod == 0)
 		{
-			$('#id_state').change(function() {
+			$(document).on('change', '#id_state', function() {
 				resetAjaxQueries();
 				updateCarriersList();
 			});
 
-			$('#zipcode').bind('keyup',function(e) {
+			$(document).on('keyup', '#zipcode', function() {
 				if (e.keyCode == '13')
 				{		
 					resetAjaxQueries();
@@ -46,17 +46,17 @@ $(document).ready(function(){
 			});
 		}
 
-		$('#update_carriers_list').click(function() {
+		$(document).on('click', '#update_carriers_list', function() {
 			updateCarriersList();
 		});
 
-		$('#carriercompare_submit').click(function() {
+		$(document).on('click', '#carriercompare_submit', function() {
 			resetAjaxQueries();
 			simulateSelection();
 			return false;
 		});
 
-		$("input[name='carrier_price_value']").live('change', function() {
+		$(document).on('change', "input[name='carrier_price_value']", function() {
 			disableUpdateCart();
 		});
 
