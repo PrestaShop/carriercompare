@@ -23,7 +23,7 @@
 *  International Registered Trademark & Property of PrestaShop SA
 */
 
-$(document).ready(function(){	
+	
 	$(document).ready(function() {		
 		$(document).on('change', '#id_country', function() {
 			resetAjaxQueries();
@@ -63,7 +63,7 @@ $(document).ready(function(){
 		updateStateByIdCountry();
 		disableUpdateCart();
 	});
-});
+
 
 var ajaxQueries = new Array();
 
