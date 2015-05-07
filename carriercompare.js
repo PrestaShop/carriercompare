@@ -110,6 +110,8 @@ function updateStateByIdCountry()
 					$('#id_state').append('<option value=\''+json[state].id_state+'\' '+(id_state == json[state].id_state ? 'selected="selected"' : '')+'>'+json[state].name+'</option>');
 				}
 				$('#states').slideDown('fast');
+				if (!!$.prototype.uniform)
+					$.uniform.update("#id_state");
 			}
 			if (SE_RefreshMethod == 0)
 				updateCarriersList();
