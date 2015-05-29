@@ -56,7 +56,7 @@ $(document).ready(function(){
 			return false;
 		});
 
-		$(document).on('change', "input[name='carrier_price_value']", function() {
+		$(document).on('change', "input[name='carrier_id']", function() {
 			disableUpdateCart();
 		});
 
@@ -82,7 +82,7 @@ function displayWaitingAjax(type, message)
 
 function disableUpdateCart()
 {
-	var checked = $('input[name="carrier_price_value"]:checked').val()
+	var checked = $('input[name="carrier_id"]:checked').val()
 	if(typeof checked == "undefined")
 		$('#carriercompare_submit').attr("disabled", "disabled");
 	else
@@ -143,7 +143,7 @@ function updateCarriersList()
 					{
 						html += '<tr class="'+(index % 2 ? 'alternate_' : '')+'item">'+
 									'<td class="" width="64px">'+
-										'&nbsp; <input type="radio" name="carrier_price_value" value="'+ ((displayPrice == 1) ? carrier.price_tax_exc : carrier.price) +'" id="id_carrier'+carrier.id_carrier+'" '+(id_carrier == carrier.id_carrier ? 'checked="checked"' : '')+'/>'+
+										'&nbsp; <input type="radio" name="carrier_id" value="'+ carrier.id_carrier +'" id="id_carrier'+carrier.id_carrier+'" '+(id_carrier == carrier.id_carrier ? 'checked="checked"' : '')+'/>'+
 									'</td>'+
 									'<td class="carrier_name">'+
 										'<label for="id_carrier'+carrier.id_carrier+'">'+
@@ -209,6 +209,7 @@ function simulateSelection()
 				var total = formatCurrency(json.order_total, currencyFormat, currencySign, currencyBlank);
 				$('#total_price').html(total);
 			}
+			$('#total_tax').html(formatCurrency(json.total_tax, currencyFormat, currencySign, currencyBlank));
 			$('tr.cart_total_delivery').show();
 		}
 	});

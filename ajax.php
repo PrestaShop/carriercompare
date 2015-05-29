@@ -44,7 +44,7 @@ switch (Tools::getValue('method'))
 		die(Tools::jsonEncode($carrierCompare->getCarriersListByIdZone((int)Tools::getValue('id_country'), (int)Tools::getValue('id_state', 0), Tools::safeOutput(Tools::getValue('zipcode', 0)))));
 		break;
 	case 'simulateSelection':
-		$cart_data = $carrierCompare->simulateSelection(Tools::getValue('carrier_price_value'), Tools::getValue('params'));
+		$cart_data = $carrierCompare->simulateSelection(Tools::getValue('carrier_id'), Tools::getValue('params'));
 		die(Tools::jsonEncode($cart_data));
 		break;
 	default:
