@@ -227,11 +227,13 @@ class CarrierCompare extends Module
 		return $carriers;
 	}
 
-	public function simulateSelection($price, $params)
+	public function simulateSelection($carrier_id, $params)
 	{
+		$id_carrier = (int)Cart::desintifier($carrier_id, '');
 		$cart_data = array();
-		$cart_data['price'] = (float)$price;
+		$cart_data['price'] = (float)$this->context->cart->getPackageShippingCost($id_carrier);
 		$cart_data['order_total'] = (float)$this->context->cart->getOrderTotal() - (float)$this->context->cart->getTotalShippingCost();
+		$cart_data['total_tax'] = (float)$this->context->cart->getOrderTotal(true, Cart::ONLY_PRODUCTS) - (float)$this->context->cart->getOrderTotal(false, Cart::ONLY_PRODUCTS) + (float)$this->context->cart->getPackageShippingCost($id_carrier, true) - (float)$this->context->cart->getPackageShippingCost($id_carrier, false);
 		$cart_data['params'] = $params;
 
 		return $cart_data;
