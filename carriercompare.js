@@ -23,46 +23,45 @@
 *  International Registered Trademark & Property of PrestaShop SA
 */
 
-	
-	$(document).ready(function() {		
-		$(document).on('change', '#id_country', function() {
+$(document).ready(function() {		
+	$(document).on('change', '#id_country', function() {
+		resetAjaxQueries();
+		updateStateByIdCountry();
+	});
+
+	if (SE_RefreshMethod == 0)
+	{
+		$(document).on('change', '#id_state', function() {
 			resetAjaxQueries();
-			updateStateByIdCountry();
-		});
-
-		if (SE_RefreshMethod == 0)
-		{
-			$(document).on('change', '#id_state', function() {
-				resetAjaxQueries();
-				updateCarriersList();
-			});
-
-			$(document).on('keyup', '#zipcode', function() {
-				if (e.keyCode == '13')
-				{		
-					resetAjaxQueries();
-					updateCarriersList();
-				}												
-			});
-		}
-
-		$(document).on('click', '#update_carriers_list', function() {
 			updateCarriersList();
 		});
 
-		$(document).on('click', '#carriercompare_submit', function() {
-			resetAjaxQueries();
-			simulateSelection();
-			return false;
+		$(document).on('keyup', '#zipcode', function(e) {
+			if (e.keyCode == '13')
+			{
+				resetAjaxQueries();
+				updateCarriersList();
+			}
 		});
+	}
 
-		$(document).on('change', "input[name='carrier_id']", function() {
-			disableUpdateCart();
-		});
+	$(document).on('click', '#update_carriers_list', function() {
+		updateCarriersList();
+	});
 
-		updateStateByIdCountry();
+	$(document).on('click', '#carriercompare_submit', function() {
+		resetAjaxQueries();
+		simulateSelection();
+		return false;
+	});
+
+	$(document).on('change', "input[name='carrier_id']", function() {
 		disableUpdateCart();
 	});
+
+	updateStateByIdCountry();
+	disableUpdateCart();
+});
 
 
 var ajaxQueries = new Array();
@@ -71,12 +70,12 @@ function displayWaitingAjax(type, message)
 {
 	$('#SE_AjaxDisplay').find('p').html(message);
 	$('#SE_AjaxDisplay').css('display', type);
-	
+
 	if(type == "block")
 		$('#update_carriers_list').attr("disabled", "disabled");
 	else if(type == "none")
 		$('#update_carriers_list').removeAttr("disabled");
-	
+
 	disableUpdateCart();
 }
 
@@ -123,9 +122,9 @@ function updateStateByIdCountry()
 
 function updateCarriersList()
 {
-	$('#carriercompare_errors_list').children().remove();	
-	$('#availableCarriers').slideUp('normal', function(){		
-		$(this).find(('tbody')).children().remove();				
+	$('#carriercompare_errors_list').children().remove();
+	$('#availableCarriers').slideUp('normal', function(){
+		$(this).find(('tbody')).children().remove();
 		$('#noCarrier').slideUp('fast');
 		displayWaitingAjax('block', SE_RetrievingInfoTS);
 
@@ -183,7 +182,7 @@ function updateCarriersList()
 	});
 
 }
-                               
+
 function simulateSelection()
 {
 	$('#carriercompare_errors').slideUp();
