@@ -23,47 +23,46 @@
 *  International Registered Trademark & Property of PrestaShop SA
 */
 
-$(document).ready(function(){
-	$(document).ready(function() {
-		$(document).on('change', '#id_country', function() {
+$(document).ready(function() {
+	$(document).on('change', '#id_country', function() {
+		resetAjaxQueries();
+		updateStateByIdCountry();
+	});
+
+	if (SE_RefreshMethod == 0)
+	{
+		$(document).on('change', '#id_state', function() {
 			resetAjaxQueries();
-			updateStateByIdCountry();
+			updateCarriersList();
 		});
 
-		if (SE_RefreshMethod == 0)
-		{
-			$(document).on('change', '#id_state', function() {
+		$(document).on('keyup', '#zipcode', function(e) {
+			if (e.keyCode == '13')
+			{
 				resetAjaxQueries();
 				updateCarriersList();
-			});
-
-			$(document).on('keyup', '#zipcode', function(e) {
-				if (e.keyCode == '13')
-				{
-					resetAjaxQueries();
-					updateCarriersList();
-				}
 			});
 		}
 
 		$(document).on('click', '#update_carriers_list', function() {
 			updateCarriersList();
 		});
+	}
 
-		$(document).on('click', '#carriercompare_submit', function() {
-			resetAjaxQueries();
-			simulateSelection();
-			return false;
-		});
+	$(document).on('click', '#carriercompare_submit', function() {
+		resetAjaxQueries();
+		simulateSelection();
+		return false;
+	});
 
-		$(document).on('change', "input[name='carrier_id']", function() {
-			disableUpdateCart();
-		});
-
-		updateStateByIdCountry();
+	$(document).on('change', "input[name='carrier_id']", function() {
 		disableUpdateCart();
 	});
+
+	updateStateByIdCountry();
+	disableUpdateCart();
 });
+
 
 var ajaxQueries = new Array();
 
